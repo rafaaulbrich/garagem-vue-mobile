@@ -1,58 +1,58 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import AcessoriosApi from "@/api/acessorios";
-const acessoriosApi = new AcessoriosApi();
+import MarcasApi from "@/api/marcas";
+const marcasApi = new MarcasApi();
 
-const defaultAcessorio = { id: null, descricao: "" };
-const acessorios = ref([]);
-const acessorio = reactive({ ...defaultAcessorio });
+const defaultMarca = { id: null, nome: "" };
+const marcas = ref([]);
+const marca = reactive({ ...defaultMarca });
 
 onMounted(async () => {
-  acessorios.value = await acessoriosApi.buscarTodosOsAcessorios();
+  marcas.value = await marcasApi.buscarTodasAsMarcas();
 });
 
 function limpar() {
-  Object.assign(acessorio, { ...defaultAcessorio });
+  Object.assign(marca, { ...defaultMarca });
 }
 
 async function salvar() {
-  if (acessorio.id) {
-    await acessoriosApi.atualizarAcessorio(acessorio);
+  if (marca.id) {
+    await marcasApi.atualizarMarca(marca);
   } else {
-    await acessoriosApi.adicionarAcessorio(acessorio);
+    await marcasApi.adicionarMarca(marca);
   }
-  acessorios.value = await acessoriosApi.buscarTodosOsAcessorios();
+  marcas.value = await marcasApi.buscarTodasAsMarcas();
   limpar();
 }
 
-function editar(acessorio_para_editar) {
-  Object.assign(acessorio, acessorio_para_editar);
+function editar(marca_para_editar) {
+  Object.assign(marca, marca_para_editar);
 }
 
 async function excluir(id) {
-  await acessoriosApi.excluirAcessorio(id);
-  acessorios.value = await acessoriosApi.buscarTodosOsAcessorios();
+  await marcasApi.excluirMarca(id);
+  marcas.value = await marcasApi.buscarTodasAsMarcas();
   limpar();
 }
 </script>
 
 <template>
-    <h1>Acessório</h1>
-    <hr />
-    <div class="form">
-      <input type="text" v-model="acessorio.descricao" placeholder="Descrição" />
-      <button @click="salvar">Salvar</button>
-      <button @click="limpar">Limpar</button>
-    </div>
-    <hr />
-    <ul>
-      <li v-for="acessorio in acessorios" :key="acessorio.id">
-        <span @click="editar(acessorio)">
-          ({{ acessorio.id }}) - {{ acessorio.descricao }} -
-        </span>
-        <button @click="excluir(acessorio.id)">X</button>
-      </li>
-    </ul>
-  </template>
-  
-  <style></style>
+  <h1>Marcas</h1>
+  <div class="form">
+    <input type="text" v-model="marca.nome" placeholder="Nome" />
+    <input type="text" v-model="marca.nacionalidade" placeholder="Nacionalidade" />
+    <button @click="salvar">Salvar</button>
+    <button @click="limpar">Limpar</button>
+  </div>
+  <hr />
+  <ul>
+    <li v-for="marca in marcas" :key="marca.id">
+      <span @click="editar(marca)">
+        ({{ marca.id }}) - {{ marca.nome }} -
+      </span>
+      <button @click="excluir(marca.id)">X</button>
+    </li>
+  </ul>
+</template>
+
+<style></style>

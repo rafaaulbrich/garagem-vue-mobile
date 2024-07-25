@@ -14,8 +14,8 @@
 }
 
 .logo img {
-  width: 3rem;
-  height: 3rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
   object-fit: cover;
 }
