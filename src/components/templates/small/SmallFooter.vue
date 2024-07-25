@@ -1,4 +1,7 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -7,7 +10,13 @@
     <RouterLink to="/categorias"> Categorias </RouterLink>
     <RouterLink to="/cores"> Cores </RouterLink>
     <RouterLink to="/marcas"> Marcas </RouterLink>
-  </div>
+    <div class="divider" />
+      <div v-if="authStore.loggedIn">
+      <router-link  to="/logout">Logout</router-link> 
+        {{ authStore.user.email }}
+      </div>
+      <router-link v-else to="/login">Login</router-link>
+    </div>
 </template>
 
 <style scoped>
@@ -39,5 +48,10 @@
   color: #282828;
   font-size: 1rem;
   transition: color 0.3s;
+}
+
+.divider {
+  margin-top: 1rem;
+  border-top: 1px solid #eeeeee;
 }
 </style>

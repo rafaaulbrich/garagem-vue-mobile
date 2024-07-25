@@ -15,7 +15,7 @@ const authStore = useAuthStore();
       <router-link to="/marcas"> Marcas </router-link>
       <div class="divider" />
       <div v-if="authStore.loggedIn">
-      <router-link  to="/logout">Logout</router-link> |
+      <router-link  to="/logout">Logout</router-link> 
         {{ authStore.user.email }}
       </div>
       <router-link v-else to="/login">Login</router-link>

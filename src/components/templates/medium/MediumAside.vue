@@ -1,5 +1,8 @@
 <script setup>
 import LogoTitle from '@/components/templates/LogoTitle.vue'
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -10,6 +13,12 @@ import LogoTitle from '@/components/templates/LogoTitle.vue'
       <router-link to="/categorias"> Categorias </router-link>
       <router-link to="/cores"> Cores </router-link>
       <router-link to="/marcas"> Marcas </router-link>
+      <div class="divider" />
+      <div v-if="authStore.loggedIn">
+      <router-link  to="/logout">Logout</router-link> 
+        {{ authStore.user.email }}
+      </div>
+      <router-link v-else to="/login">Login</router-link>
     </div>
   </div>
 </template>
@@ -30,5 +39,10 @@ import LogoTitle from '@/components/templates/LogoTitle.vue'
   gap: 1rem;
   font-size: 1.3rem;
   margin-top: 2.2rem;
+}
+
+.divider {
+  margin-top: 1rem;
+  border-top: 1px solid #eeeeee;
 }
 </style>
