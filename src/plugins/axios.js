@@ -1,7 +1,6 @@
 import axios from 'axios'
-const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-axios.defaults.baseURL = `${BASE_URL}/api/`;
+axios.defaults.baseURL = 'http://0.0.0.0:19003/api'
 // axios.defaults.baseURL = "http://localhost:8000/";
 // axios.defaults.baseURL = "https://livraria-drf.herokuapp.com/api";
 

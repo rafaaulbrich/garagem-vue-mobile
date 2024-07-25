@@ -26,5 +26,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <h1>Garagem</h1>
+    <RouterLink/>
 </template>
